@@ -129,7 +129,7 @@ public class HighScoreManager : MonoBehaviour
             scores = new HighScore[4];
             for (int i = 0; i < 4; i++)
             {
-                scores[i] = new HighScore("Player " + (i + 1), 100);
+                scores[i] = new HighScore("Player " + (i + 1), 100 - (25 * i));
             }
         }
     }

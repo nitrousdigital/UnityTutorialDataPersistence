@@ -34,10 +34,14 @@ public class Paddle : MonoBehaviour
         pos.x += input * Speed * Time.deltaTime;
 
         if (pos.x > MaxMovement)
+        {
             pos.x = MaxMovement;
+        }            
         else if (pos.x < -MaxMovement)
+        {
             pos.x = -MaxMovement;
-
+        }
+            
         transform.position = pos;
     }
 }
