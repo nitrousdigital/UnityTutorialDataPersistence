@@ -78,7 +78,7 @@ public class MainManager : MonoBehaviour
     private void PrepareLevel(int level)
     {
         this.level = level;
-        paddle.Speed = 2f;
+        paddle.Speed = this.level + 1f;
         paddle.ResetPosition();
         m_Started = false;
 

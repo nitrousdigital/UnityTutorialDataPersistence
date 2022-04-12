@@ -51,35 +51,39 @@ public class HighScoreManager : MonoBehaviour
     }
 
     /**
-     * Save the current score to the high score table
+     * Save the most recent score to the high score table
+     * along with the specified player name.
+     * 
+     * @return True if the score was inserted and saved. False if
+     * either a name was not specified or the score is not higher than
+     * any current entries in the high score table.
      */
-    public void SaveHighScore(TextMeshProUGUI scoreText)
+    public bool SaveCurrentScore(string playerName)
     {
-        string name = scoreText.text.Trim();
+        string name = playerName.Trim();
         if (name.Length == 0)
         {
             // require a name
-            return;
+            return false;
         }
 
-        Debug.Log("Saving high score " + currentScore + " for user " + scoreText.text);
+        Debug.Log("Saving high score " + currentScore + " for player " + playerName);
         for (int i = 0; i < scores.Length; i++)
         {
             if (currentScore > scores[i].score)
             {
-                InsertScore(currentScore, name, i);
-                break;
+                InsertScore(new HighScore(playerName, currentScore), i);
+                currentScore = 0;
+                return true;
             }
         }
-
-        // load main menu screen
-        SceneManager.LoadScene(0); 
+        return false;
     }
 
     /**
      * Insert a score into the high score table and save
      */
-    private void InsertScore(int score, string name, int position)
+    private void InsertScore(HighScore score, int position)
     {
         // shift scores down before insertion
         for (int i = scores.Length - 1; i > position; i--)
@@ -88,7 +92,7 @@ public class HighScoreManager : MonoBehaviour
         }
 
         // insert the new score
-        scores[position] = new HighScore(name, score);
+        scores[position] = score;
         SaveScores();
     }
 
@@ -98,6 +102,14 @@ public class HighScoreManager : MonoBehaviour
     public void SetCurrentScore(int score)
     {
         currentScore = score;
+    }
+
+    /**
+     * @return The score awarded from the most recent gameplay
+     */
+    public int GetCurrentScore()
+    {
+        return currentScore;
     }
 
     /**
