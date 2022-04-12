@@ -20,8 +20,8 @@ public class MainManager : MonoBehaviour
     public GameObject gameOverText;
     public GameObject levelAnnounceText;
 
-    private int levelAnnounceDuration = 2;
-    private int gameOverAnnounceDuration = 2;
+    private int levelAnnounceDuration = 3;
+    private int gameOverAnnounceDuration = 4;
 
     private GameState state;
     private Paddle paddle;    

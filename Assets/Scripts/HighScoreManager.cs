@@ -28,6 +28,9 @@ public class HighScoreManager : MonoBehaviour
     public static HighScoreManager Instance { get; private set; }
     private const string SAVE_FILE = "/scores.json";
 
+    /**
+     * High Scores in order from highest to lowest
+     */
     public HighScore[] scores = new HighScore[0];
 
 
@@ -53,11 +56,40 @@ public class HighScoreManager : MonoBehaviour
     public void SaveHighScore(TextMeshProUGUI scoreText)
     {
         string name = scoreText.text.Trim();
-        if (name.Length > 0)
+        if (name.Length == 0)
         {
-            Debug.Log("Saving high score " + currentScore + " for user " + scoreText.text);
-            SceneManager.LoadScene(0); // main menu scene
+            // require a name
+            return;
         }
+
+        Debug.Log("Saving high score " + currentScore + " for user " + scoreText.text);
+        for (int i = 0; i < scores.Length; i++)
+        {
+            if (currentScore > scores[i].score)
+            {
+                InsertScore(currentScore, name, i);
+                break;
+            }
+        }
+
+        // load main menu screen
+        SceneManager.LoadScene(0); 
+    }
+
+    /**
+     * Insert a score into the high score table and save
+     */
+    private void InsertScore(int score, string name, int position)
+    {
+        // shift scores down before insertion
+        for (int i = scores.Length - 1; i > position; i--)
+        {
+            scores[i] = scores[i - 1];
+        }
+
+        // insert the new score
+        scores[position] = new HighScore(name, score);
+        SaveScores();
     }
 
     /**
@@ -65,7 +97,7 @@ public class HighScoreManager : MonoBehaviour
      */
     public void SetCurrentScore(int score)
     {
-        this.currentScore = score;
+        currentScore = score;
     }
 
     /**
