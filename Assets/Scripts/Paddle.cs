@@ -6,11 +6,23 @@ public class Paddle : MonoBehaviour
 {
     public float Speed = 2.0f;
     public float MaxMovement = 2.0f;
-    
+
+    private float initialX;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.initialX = transform.position.x;    
+    }
+
+    /**
+     * Reset the paddle back to its initial position
+     */
+    public void ResetPosition()
+    {
+        Vector3 pos = transform.position;
+        pos.x = initialX;
+        transform.position = pos;
     }
 
     // Update is called once per frame

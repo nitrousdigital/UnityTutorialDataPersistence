@@ -5,16 +5,27 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody m_Rigidbody;
+    private Rigidbody ballRb;
+    private Vector3 initialPosition;
+    private Paddle paddle;
 
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        ballRb = GetComponent<Rigidbody>();
+        paddle = FindObjectOfType <Paddle>();
+        initialPosition = gameObject.transform.position;
     }
-    
+
+    public void ResetPosition()
+    {
+        ballRb.velocity = new Vector3(0, 0, 0);
+        gameObject.transform.position = initialPosition;
+        ballRb.transform.SetParent(paddle.transform);
+    }
+
     private void OnCollisionExit(Collision other)
     {
-        var velocity = m_Rigidbody.velocity;
+        var velocity = ballRb.velocity;
         
         //after a collision we accelerate a bit
         velocity += velocity.normalized * 0.01f;
@@ -31,6 +42,6 @@ public class Ball : MonoBehaviour
             velocity = velocity.normalized * 3.0f;
         }
 
-        m_Rigidbody.velocity = velocity;
+        ballRb.velocity = velocity;
     }
 }
