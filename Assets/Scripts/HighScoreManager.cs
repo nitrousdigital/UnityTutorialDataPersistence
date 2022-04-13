@@ -51,6 +51,14 @@ public class HighScoreManager : MonoBehaviour
     }
 
     /**
+     * @return The current high score
+     */
+    public HighScore GetHighScore()
+    {
+        return scores[0];
+    }
+
+    /**
      * Save the most recent score to the high score table
      * along with the specified player name.
      * 

@@ -17,6 +17,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody ballRb;
     public int LineCount = 6;
     public Text ScoreText;
+    public Text HighScoreText;
     public GameObject gameOverText;
     public GameObject levelAnnounceText;
 
@@ -37,6 +38,8 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         paddle = FindObjectOfType<Paddle>();
+        HighScore highScore = HighScoreManager.Instance.GetHighScore();
+        HighScoreText.text = "Best Score: " + highScore.name + " : " + highScore.score;
         BuildBricks();
         GoToLevel(1);
     }

@@ -8,6 +8,9 @@ using TMPro;
  */
 public class HighScoreDisplayManager : MonoBehaviour
 {
+    private const string TEXT_PREFIX = "<mspace=.8em>";
+    private const string TEXT_SUFFIX = "</mspace>";
+
     /**
      * The text mesh pro text objects used to display the high scores
      */
@@ -42,7 +45,7 @@ public class HighScoreDisplayManager : MonoBehaviour
                 middle = middle + ".";
             }
 
-            topScores[i].text = name + middle + score;
+            topScores[i].text = TEXT_PREFIX + name + middle + score + TEXT_SUFFIX;
         }
     }
 

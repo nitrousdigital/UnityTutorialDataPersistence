@@ -10,12 +10,16 @@ public class HighScoreEntryManager : MonoBehaviour
      * The textmesh field in which the current score should be displayed
      */
     public TextMeshProUGUI scoreText;
+    public TMP_InputField nameInputField;
 
     // Start is called before the first frame update
     void Start()
     {
         int score = HighScoreManager.Instance.GetCurrentScore();
         scoreText.text = "" + score;
+
+        nameInputField.Select();
+        nameInputField.ActivateInputField();
     }
 
     /**
