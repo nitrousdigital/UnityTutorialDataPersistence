@@ -39,7 +39,7 @@ public class MainManager : MonoBehaviour
     {
         paddle = FindObjectOfType<Paddle>();
         HighScore highScore = HighScoreManager.Instance.GetHighScore();
-        HighScoreText.text = "Best Score: " + highScore.name + " : " + highScore.score;
+        HighScoreText.text = ("Best Score: " + highScore.name + " : " + highScore.score).ToUpper();
         BuildBricks();
         GoToLevel(1);
     }
@@ -133,7 +133,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"SCORE : {m_Points}";
         CheckLevelComplete();
     }
 
