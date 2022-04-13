@@ -26,7 +26,8 @@ public class MainManager : MonoBehaviour
     private int gameOverAnnounceDuration = 4;
 
     private GameState state;
-    private Paddle paddle;    
+    private Paddle paddle;
+    private Ball ball;
     private bool ballLaunched = false;
     private int m_Points;
     
@@ -39,6 +40,7 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         paddle = FindObjectOfType<Paddle>();
+        ball = FindObjectOfType<Ball>();
         HighScore highScore = HighScoreManager.Instance.GetHighScore();
         HighScoreText.text = ("BEST SCORE: " + highScore.name + " : " + highScore.score).ToUpper();
         BuildBricks();
@@ -88,7 +90,8 @@ public class MainManager : MonoBehaviour
         ballLaunched = false;
 
         ballSpeed = this.level + 1f;
-        
+        ball.ResetPosition();
+
         // prepare scores for the level
         int[] pointCountArray = new[] { 1, 1, 2, 2, 5, 5 };
         for (int i = 0; i < pointCountArray.Length; i++)
