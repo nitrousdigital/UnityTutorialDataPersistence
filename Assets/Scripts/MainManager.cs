@@ -18,8 +18,9 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Text ScoreText;
     public Text HighScoreText;
+    public Text LevelAnnounceText;
+    public GameObject LevelAnnounceTextContainer;
     public GameObject gameOverText;
-    public GameObject levelAnnounceText;
 
     private int levelAnnounceDuration = 3;
     private int gameOverAnnounceDuration = 4;
@@ -39,7 +40,7 @@ public class MainManager : MonoBehaviour
     {
         paddle = FindObjectOfType<Paddle>();
         HighScore highScore = HighScoreManager.Instance.GetHighScore();
-        HighScoreText.text = ("Best Score: " + highScore.name + " : " + highScore.score).ToUpper();
+        HighScoreText.text = ("BEST SCORE: " + highScore.name + " : " + highScore.score).ToUpper();
         BuildBricks();
         GoToLevel(1);
     }
@@ -50,6 +51,7 @@ public class MainManager : MonoBehaviour
     private void GoToLevel(int level)
     {
         this.level = level;
+        LevelAnnounceText.text = "LEVEL " + level;
         state = GameState.LEVEL_ANNOUNCE;
         ShowUiForState();
         PrepareLevel(level);
@@ -72,7 +74,7 @@ public class MainManager : MonoBehaviour
     private void ShowUiForState()
     {
         gameOverText.SetActive(state == GameState.GAME_OVER_ANNOUNCE);
-        levelAnnounceText.SetActive(state == GameState.LEVEL_ANNOUNCE);
+        LevelAnnounceTextContainer.SetActive(state == GameState.LEVEL_ANNOUNCE);
     }
 
     /**

@@ -579,8 +579,9 @@ MonoBehaviour:
   LineCount: 6
   ScoreText: {fileID: 188020406}
   HighScoreText: {fileID: 2078529056}
+  LevelAnnounceText: {fileID: 1458104402}
+  LevelAnnounceTextContainer: {fileID: 382877709}
   gameOverText: {fileID: 464231008}
-  levelAnnounceText: {fileID: 382877709}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
