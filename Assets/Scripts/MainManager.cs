@@ -26,14 +26,13 @@ public class MainManager : MonoBehaviour
 
     private GameState state;
     private Paddle paddle;    
-    private bool m_Started = false;
+    private bool ballLaunched = false;
     private int m_Points;
     
     private int level = 1;
     private int bricksPerLine;
     private List<Brick> bricks;
     private float ballSpeed;
-    private int bricksRemaining;
 
     // Start is called before the first frame update
     void Start()
@@ -82,9 +81,9 @@ public class MainManager : MonoBehaviour
     private void PrepareLevel(int level)
     {
         this.level = level;
-        paddle.Speed = this.level + 1f;
+        paddle.Speed = this.level + 2f;
         paddle.ResetPosition();
-        m_Started = false;
+        ballLaunched = false;
 
         ballSpeed = this.level + 1f;
         
@@ -105,16 +104,15 @@ public class MainManager : MonoBehaviour
                 bricks[brickIdx].gameObject.SetActive(true);
             }
         }
-        bricksRemaining = LineCount * bricksPerLine;
     }
 
     private void Update()
     {
-        if (state == GameState.PLAYING && !m_Started)
+        if (state == GameState.PLAYING && !ballLaunched)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                m_Started = true;
+                ballLaunched = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
                 Vector3 forceDir = new Vector3(randomDirection, 1, 0);
                 forceDir.Normalize();
@@ -123,13 +121,11 @@ public class MainManager : MonoBehaviour
                 ballRb.AddForce(forceDir * ballSpeed, ForceMode.VelocityChange);
             }
         }
-        //else if (m_GameOver)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //    }
-        //}
+    }
+
+    public bool IsPlaying()
+    {
+        return state == GameState.PLAYING;
     }
 
     void AddPoint(int point)

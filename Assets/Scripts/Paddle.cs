@@ -8,11 +8,14 @@ public class Paddle : MonoBehaviour
     public float MaxMovement = 2.0f;
 
     private float initialX;
+    private MainManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.initialX = transform.position.x;    
+
+        initialX = transform.position.x;
+        gameManager = FindObjectOfType<MainManager>();
     }
 
     /**
@@ -28,6 +31,11 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.IsPlaying())
+        {
+            return;
+        }
+
         float input = Input.GetAxis("Horizontal");
 
         Vector3 pos = transform.position;
