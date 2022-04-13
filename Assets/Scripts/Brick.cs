@@ -35,8 +35,6 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        onDestroyed.Invoke(PointValue);
-
         // delay hiding the brick to ensure
         // the ball will have time to bounce
         StartCoroutine(ScheduleHide());
@@ -46,5 +44,6 @@ public class Brick : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);
+        onDestroyed.Invoke(PointValue);
     }
 }

@@ -33,6 +33,7 @@ public class MainManager : MonoBehaviour
     private int bricksPerLine;
     private List<Brick> bricks;
     private float ballSpeed;
+    private int bricksRemaining;
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +105,7 @@ public class MainManager : MonoBehaviour
                 bricks[brickIdx].gameObject.SetActive(true);
             }
         }
+        bricksRemaining = LineCount * bricksPerLine;
     }
 
     private void Update()
@@ -161,6 +163,7 @@ public class MainManager : MonoBehaviour
                 count++;
             }
         }
+        Debug.Log(count + " visible bricks");
         return count;
     }
 
