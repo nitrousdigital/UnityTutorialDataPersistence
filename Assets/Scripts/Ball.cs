@@ -83,7 +83,7 @@ public class Ball : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Brick"))
         {
-            audioManager.PlayBrickBounceSound();
+            audioManager.PlayBrickHitSound();
         }
         else if (other.gameObject.CompareTag("Wall"))
         {

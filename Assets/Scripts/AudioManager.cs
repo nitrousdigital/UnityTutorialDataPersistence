@@ -19,21 +19,19 @@ public class AudioManager : MonoBehaviour
     public void PlayBrickHitSound()
     {
         Play(brickHitSound);
+        Debug.Log("Brick Hit Sound");
     }
 
     public void PlayPaddleBounceSound()
     {
         PlayBounceSound();
-    }
-
-    public void PlayBrickBounceSound()
-    {
-        PlayBounceSound();
+        Debug.Log("Paddle Hit Sound");
     }
 
     public void PlayWallBounceSound()
     {
         PlayBounceSound();
+        Debug.Log("Wall Bounce Sound");
     }
 
     private void PlayBounceSound()
