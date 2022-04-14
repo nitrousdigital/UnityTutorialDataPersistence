@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Paddle
+  - Brick
+  - Wall
+  - DeathZone
   layers:
   - Default
   - TransparentFX

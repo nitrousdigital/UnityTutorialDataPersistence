@@ -11,8 +11,11 @@ public class Ball : MonoBehaviour
     private float paddleWidth;
     private float halfPaddleWidth;
 
+    private AudioManager audioManager;
+
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();    
         ballRb = GetComponent<Rigidbody>();
         paddle = FindObjectOfType <Paddle>();
         paddleWidth = paddle.GetComponent<BoxCollider>().size.x;
@@ -76,6 +79,15 @@ public class Ball : MonoBehaviour
                     ballRb.velocity.y,
                     ballRb.velocity.z);
             }
+            audioManager.PlayPaddleBounceSound();
+        }
+        else if (other.gameObject.CompareTag("Brick"))
+        {
+            audioManager.PlayBrickBounceSound();
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            audioManager.PlayWallBounceSound();
         }
     }
 }
