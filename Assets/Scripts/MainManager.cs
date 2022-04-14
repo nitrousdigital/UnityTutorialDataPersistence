@@ -105,7 +105,7 @@ public class MainManager : MonoBehaviour
             for (int x = 0; x < bricksPerLine; ++x)
             {
                 int brickIdx = (i * bricksPerLine) + x;
-                bricks[brickIdx].PointValue = pointCountArray[i];
+                bricks[brickIdx].SetPointValue(pointCountArray[i]);
                 bricks[brickIdx].gameObject.SetActive(true);
             }
         }
